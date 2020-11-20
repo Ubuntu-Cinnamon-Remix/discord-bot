@@ -29,25 +29,30 @@ token = open('./token.txt').read()
 # Our Ubuntu Cinnamon Orange Embed Colour
 ubuntucinnamon = (221, 104, 42)
 
+# Time, for logging and such
+time = datetime.datetime.now()
+current_time = time.strftime("%H:%M:%S")
+
 
 @client.event
 async def on_connect():
-    print('[TIME] Bot online with a username of [username] and operating in [server number] servers.')
+    print('[' + current_time + '] Bot online with a username of [username] and operating in [server number] servers.')
 
 
 async def log_message(msg):
-    time = datetime.datetime.now()
-    current_time = time.strftime("%H:%M:%S")
+    # Reinitialize these variables or the time will be the same as the start time
+    logtime = datetime.datetime.now()
+    current_logtime = logtime.strftime("%H:%M:%S")
 
-    print("[" + current_time + "] #" + msg.channel.name + " " + msg.author.name + ":          " + msg.content)
+    print("[" + current_logtime + "] #" + msg.channel.name + " " + msg.author.name + ":          " + msg.content)
 
     channel = client.get_channel(734439066681999449)
 
     await channel.send(
-        "[" + current_time + "] #" + msg.channel.name + " " + msg.author.name + ":          " + msg.content)
+        "[" + current_logtime + "] #" + msg.channel.name + " " + msg.author.name + ":          " + msg.content)
 
     logging.basicConfig(filename='./logs.txt', level=logging.INFO)
-    logging.info("[" + current_time + "] #" + msg.channel.name + " " + msg.author.name + ":          " + msg.content)
+    logging.info("[" + current_logtime + "] #" + msg.channel.name + " " + msg.author.name + ":          " + msg.content)
 
 
 @client.event
@@ -74,8 +79,7 @@ async def on_message(msg):
         await msg.channel.send(":white_check_mark: " + "<@!" + pingid + ">, Sucessfully added Notifications role!")
 
 
-print('[TIME] Beginning startup of Discord Bot.')
-
-print('[TIME] Starting Discord Client Connection.')
+print('[' + current_time + '] Beginning startup of Discord Bot.')
+print('[' + current_time + '] Starting Discord Client Connection.')
 
 client.run(token)
