@@ -70,7 +70,6 @@ async def on_message(msg):
     pingid = "<@!" + str(msg.author.id) + ">"
 
     if msg.content == "uc!ping":
-        await msg.channel.send("Work in progress-please be patient for better results")
         await msg.channel.send(pingid + ", :ping_pong: Pong! {0} ms".format(round(client.latency, 1)))
 
     if msg.content == "uc!notifications":
