@@ -1,3 +1,9 @@
+# DO NOT PUSH THE LOG FILE!
+logs.txt
+
+# No, you don't get to see our Bot Token, go away
+token.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
