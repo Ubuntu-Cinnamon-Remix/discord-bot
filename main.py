@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (C) 2020 Joshua Peisach <itzswirlz2020@outlook.com>
+# Copyright (C) 2020-2021 Joshua Peisach <itzswirlz2020@outlook.com>
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,10 +16,11 @@
 # Free Software Foundation, Inc.,
 # 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
-import discord
-import logging
 import datetime
+import logging
+import discord
 from discord.utils import get
+import memes
 
 # Bot
 client = discord.Client()
@@ -32,6 +33,10 @@ ubuntucinnamon = (221, 104, 42)
 # Time, for logging and such
 time = datetime.datetime.now()
 current_time = time.strftime("%H:%M:%S")
+
+# For our Memes, a list of commands that will trigger memes.
+# Obviously this is subject to change here.
+memecmds = ['uc!simonsfault']
 
 
 @client.event
@@ -76,6 +81,9 @@ async def on_message(msg):
         notificationsrole = get(msg.author.guild.roles, name="Notifications")
         await msg.author.add_roles(notificationsrole)
         await msg.channel.send(":white_check_mark: " + "<@!" + pingid + ">, Sucessfully added Notifications role!")
+
+    if msg.content in memecmds:
+        await memes.on_meme_message(msg)
 
 
 print('[' + current_time + '] Beginning startup of Discord Bot.')
